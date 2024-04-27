@@ -1,7 +1,8 @@
-const { thought, user } = require('../models/index');
+const User = require('../models/User');
+const Thought = require('../models/Thought');
 
 const getAllThoughts = (req, res) => {
-    thought.find({})
+    Thought.find({})
     .then((thoughts) => {
         res.json(thoughts);
     })
@@ -11,7 +12,7 @@ const getAllThoughts = (req, res) => {
 }
 
 const getThoughtById = (req, res) => {
-    thought.findOne({ _id: req.params.id })
+    Thought.findOne({ _id: req.params.id })
     .then((thought) => {
         if (!thought) {
             return res.status(404).json({ message: 'No thought found with this id!' });
@@ -50,7 +51,7 @@ const createThought = (req, res) => {
 }
 
 const updateThought = (req, res) => {
-    thought.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+    Thought.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then((thought) => {
         if (!thought) {
             return res.status(404).json({ message: 'No thought found with this id!' });
@@ -63,7 +64,7 @@ const updateThought = (req, res) => {
 }
 
 const deleteThought = (req, res) => {
-    thought.findOneAndDelete({ _id: req.params.id })
+    Thought.findOneAndDelete({ _id: req.params.id })
     .then((thought) => {
         if (!thought) {
             res.status(404).json({ message: 'No thought found with this id!' });
